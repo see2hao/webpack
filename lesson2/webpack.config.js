@@ -19,11 +19,13 @@ module.exports = {
                         // presets: ['babel-preset-env'],
                         presets: [
                             //如果需要给特定的presets指定targets参数，则可以这样设置
-                            ['babel-preset-env', {
-                                targets: {
-                                    browsers: ['last 2 versions' , '> 1%']
-                                }
-                            }],
+                            // [
+                            //     ['babel-preset-env', {
+                            //         targets:{
+                            //             browsers: ['last 2 versions', '>1%']
+                            //         }
+                            //     }]
+                            // ],
                             //可以针对不同的浏览器：chrome
                             // ['babel-preset-env', {
                             //     targets: {
