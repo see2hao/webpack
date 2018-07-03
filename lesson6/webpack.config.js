@@ -24,11 +24,12 @@ const cleanOptions = {
 module.exports = {
     entry: {
         main: './app.js',
+        route: './route.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist/'),
         // publicPath: './dist/',
-        filename: '[name].[hash:5].bundle.js',
+        filename: '[name].bundle.[hash:5].js',
     },
     module: {
         rules: [
@@ -43,7 +44,7 @@ module.exports = {
                                     minimize: true,
                                 }
                             },
-                            'less-loader'
+                            'less-loader',  
                         ],
                 })
             },
@@ -72,10 +73,15 @@ module.exports = {
             //     ]
             // },
             {
-                test: /\.(jpg | png | jpeg | gif)$/,
+                test: /\.(jpg|png|jpeg|gif)$/,
                 use: [
                     {
-                        loader: 'file-loader',
+                        // loader: 'file-loader',
+                        //如果小于一定大小的img，则使用base64插入css中，减少http请求次数
+                        loader: 'url-loader',
+                        options: {  
+                            limit: 1000000,
+                        }
                     }
                 ]
             }
@@ -96,8 +102,13 @@ module.exports = {
         //编译时，自动删除dist目录
         new CleanWebpackPlugin(pathsToClean, cleanOptions),
         //自动生成html文件，并插入生成的资源
-        new HtmlWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            title: 'test',
+            filename: 'index.html',
+            template: './src/templates/template1.html',
+        }),
         //从bundle或bundles中提取至单独的文件中
-        new ExtractTextWebpackPlugin('main.bundle.css'),
+        //webpack4.0后，使用mini-css-extract-plugin替换了此插件 https://github.com/webpack-contrib/mini-css-extract-plugin
+        new ExtractTextWebpackPlugin('[name].bundle.[hash:5].css'),
     ]
 }

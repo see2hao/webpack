@@ -33,14 +33,14 @@
     "purifycss-webpack": "^0.7.0",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
+    "url-loader": "^1.0.1",
     "webpack": "^3.10.0"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "jquery": "^3.3.1",
-    "lodash": "^4.17.10",
-    "webpack": "^3.8.1"
+    "lodash": "^4.17.10"
   },
   "browserslist": [
     ">1%"
