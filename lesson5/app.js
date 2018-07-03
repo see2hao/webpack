@@ -1,5 +1,5 @@
-import base from './src/css/base.css';
-import './src/css/common.css';
+import base from './src/css/base.less';
+import common from './src/css/common.less';
 
 // base.use();
 // base.unuse();

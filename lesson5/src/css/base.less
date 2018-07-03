@@ -1,0 +1,26 @@
+@backgroundColor: purple;
+@fontColor: white;
+
+html{
+    background: @backgroundColor;
+    transform: translate(10%, 10%);
+}
+
+//css next
+:root{
+    --mainColor: pink;
+}
+
+.fontColor{
+    /* 从另一个css文件中引入class */
+    composes: fontSize from './common.less';
+    color: @fontColor;
+    background: var(--mainColor);
+}
+
+.test{
+    background: blue;
+    font-size: 20px;
+    position: relative;
+}
+

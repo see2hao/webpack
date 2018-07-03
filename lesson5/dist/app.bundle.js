@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "./dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -149,6 +149,22 @@ function toComment(sourceMap) {
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, "html{font-size:20px}.common{font-size:40px}", ""]);
+
+// exports
+exports.locals = {
+	"fontSize": "common"
+};
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
 /*
 	MIT License http://www.opensource.org/licenses/mit-license.php
 	Author Tobias Koppers @sokra
@@ -212,7 +228,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(5);
+var	fixUrls = __webpack_require__(6);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -532,15 +548,15 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_css_base_css__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_css_base_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__src_css_base_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_css_common_css__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_css_common_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__src_css_common_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_css_base_less__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_css_base_less___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__src_css_base_less__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_css_common_less__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_css_common_less___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__src_css_common_less__);
 
 
 
@@ -548,14 +564,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 // base.unuse();
 
 const div = document.getElementById('container');
-div.innerHTML = `<p class="${__WEBPACK_IMPORTED_MODULE_0__src_css_base_css___default.a.fontColor}">测试下字体颜色是否变成了白色</p>`
+div.innerHTML = `<p class="${__WEBPACK_IMPORTED_MODULE_0__src_css_base_less___default.a.fontColor}">测试下字体颜色是否变成了白色</p>`
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(4);
+var content = __webpack_require__(5);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -569,13 +585,13 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(1)(content, options);
+var update = __webpack_require__(2)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
 if(false) {
-	module.hot.accept("!!../../../node_modules/_css-loader@0.28.11@css-loader/index.js??ref--0-1!./base.css", function() {
-		var newContent = require("!!../../../node_modules/_css-loader@0.28.11@css-loader/index.js??ref--0-1!./base.css");
+	module.hot.accept("!!../../../node_modules/_css-loader@0.28.11@css-loader/index.js??ref--0-1!../../../node_modules/_postcss-loader@2.1.5@postcss-loader/lib/index.js??postcss!../../../node_modules/_less-loader@4.1.0@less-loader/dist/cjs.js!./base.less", function() {
+		var newContent = require("!!../../../node_modules/_css-loader@0.28.11@css-loader/index.js??ref--0-1!../../../node_modules/_postcss-loader@2.1.5@postcss-loader/lib/index.js??postcss!../../../node_modules/_less-loader@4.1.0@less-loader/dist/cjs.js!./base.less");
 
 		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 
@@ -601,23 +617,24 @@ if(false) {
 }
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
 // imports
-
+exports.i(__webpack_require__(1), undefined);
 
 // module
-exports.push([module.i, "html{background:purple}._13LE9lIr5y3QWw1KDJ1Um3{color:#fff}", ""]);
+exports.push([module.i, "html{background:purple;transform:translate(10%,10%)}.base{color:#fff;background:pink;background:blue;font-size:20px;position:relative}", ""]);
 
 // exports
 exports.locals = {
-	"fontColor": "_13LE9lIr5y3QWw1KDJ1Um3"
+	"fontColor": "base " + __webpack_require__(1).locals["fontSize"] + "",
+	"test": "base"
 };
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 
@@ -712,11 +729,11 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(7);
+var content = __webpack_require__(8);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -730,13 +747,13 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(1)(content, options);
+var update = __webpack_require__(2)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
 if(false) {
-	module.hot.accept("!!../../../node_modules/_css-loader@0.28.11@css-loader/index.js??ref--0-1!./common.css", function() {
-		var newContent = require("!!../../../node_modules/_css-loader@0.28.11@css-loader/index.js??ref--0-1!./common.css");
+	module.hot.accept("!!../../../node_modules/_css-loader@0.28.11@css-loader/index.js??ref--0-1!../../../node_modules/_postcss-loader@2.1.5@postcss-loader/lib/index.js??postcss!../../../node_modules/_less-loader@4.1.0@less-loader/dist/cjs.js!./common.less", function() {
+		var newContent = require("!!../../../node_modules/_css-loader@0.28.11@css-loader/index.js??ref--0-1!../../../node_modules/_postcss-loader@2.1.5@postcss-loader/lib/index.js??postcss!../../../node_modules/_less-loader@4.1.0@less-loader/dist/cjs.js!./common.less");
 
 		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 
@@ -762,7 +779,7 @@ if(false) {
 }
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -770,10 +787,12 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "html{font-size:20px}", ""]);
+exports.push([module.i, "html{font-size:20px}.common{font-size:40px}", ""]);
 
 // exports
-
+exports.locals = {
+	"fontSize": "common"
+};
 
 /***/ })
 /******/ ]);

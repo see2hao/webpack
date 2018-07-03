@@ -1,5 +1,7 @@
 const webpack = require('webpack')
 const path = require('path')
+const Purifycss = require('purifycss-webpack')
+const glob = require('glob-all')
 
 module.exports = {
     entry: {
@@ -14,7 +16,9 @@ module.exports = {
    module: {
        rules:[
            {
-               test: /\.css$/,
+            //    test: /\.css$/,
+            //处理css预编译文件：less、sass
+            test: /\.less$/,
                use: [
                    {
                     //使用style-loader直接在html中插入style标签
@@ -35,13 +39,41 @@ module.exports = {
                           loader: 'css-loader',
                           options:{
                               minimize: true,
+                              //启用css模块
                               modules: true,
+                              //修改class的名称（打包后的class名称）
+                              localIdentName: '[name]',
                           }
                        //与style-loader/url时使用
                     //    loader: 'file-loader'
+                   },
+                   //postcss
+                   {
+                        loader: 'postcss-loader',
+                        options: {
+                            ident: 'postcss',
+                            plugins: [
+                                // require('autoprefixer'),
+                                //postcss-cssnext 实际上是包含autoporefixer的，所以，当引入了postcss-cssnext的时候，
+                                //可以去除autoprefixer插件
+                                require('postcss-cssnext'),
+                            ]
+                        }
+                   },
+                   {
+                       loader: 'less-loader',
                    }
                ]
            }
        ]
-   }
+   },
+   plugins: [
+       new Purifycss({
+           paths: glob.sync([
+               path.join(__dirname, './*.html'),
+               path.join(__dirname, './src/*.js'),
+           ])
+       }),
+    //    new webpack.optimize.CommonsChunkPlugin(),
+   ]
 }
