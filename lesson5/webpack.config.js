@@ -25,14 +25,18 @@ module.exports = {
                     loader: 'style-loader',
                     options: {
                         //选择style标签插入的位置
-                        insertInto: 'div',
+                        // insertInto: 'div',
                         //html中，只插入一个style标签
                         // singleton: true,
-                        transform: './css.transform.js',
+                        // transform: './css.transform.js',
                     },
                    },{
                         //与style-loader时使用
-                          loader: 'css-loader'
+                          loader: 'css-loader',
+                          options:{
+                              minimize: true,
+                              modules: true,
+                          }
                        //与style-loader/url时使用
                     //    loader: 'file-loader'
                    }
