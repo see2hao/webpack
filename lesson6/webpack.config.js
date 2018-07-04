@@ -4,7 +4,10 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const Purifycss = require('purifycss-webpack')
+const ImageminPlugin = require('imagemin-webpack-plugin').default
 const glob = require('glob-all')
+
+const isProduction = process.env.NODE_ENV === 'production'?true:false;
 
 const pathsToClean = [
     'dist',         //移除dist目录
@@ -43,11 +46,56 @@ module.exports = {
                                 options: {
                                     minimize: true,
                                 }
+                            },{
+                                loader: 'postcss-loader',
+                                options: {
+                                    ident: 'postcss',
+                                    plugins: [
+                                        //自动生成雪碧图
+                                        require('postcss-sprites')({
+                                            //保存输出的css文件
+                                            // stylesheetPath: './dist/css/',
+                                            //保存输入的雪碧图
+                                            spritePath: './dist/images/',
+                                            spritesmith: {
+                                                engineOpts: {
+                                                    quality: 10,
+                                                }
+                                            }
+                                        }),
+                                        //引入cssnext
+                                        require('postcss-cssnext'),
+                                    ]
+                                }
                             },
-                            'less-loader',  
+                            'less-loader', 
                         ],
                 })
             },
+            {
+                test: /\.(jpg|png|jpeg|gif)$/,
+                use: [
+                    {
+                        loader: 'img-loader',
+                        options: {
+                            quality: 10,
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(jpg|png|jpeg|gif)$/,
+                use: [
+                    {
+                        // loader: 'file-loader',
+                        //如果小于一定大小的img，则使用base64插入css中，减少http请求次数
+                        loader: 'url-loader',
+                        options: {  
+                            limit: 1000000,
+                        }
+                    }
+                ]
+            } 
             //style-loader css-loader postcss-loader less-loader
             // {
             //     test: /\.less$/,
@@ -72,19 +120,6 @@ module.exports = {
             //         }
             //     ]
             // },
-            {
-                test: /\.(jpg|png|jpeg|gif)$/,
-                use: [
-                    {
-                        // loader: 'file-loader',
-                        //如果小于一定大小的img，则使用base64插入css中，减少http请求次数
-                        loader: 'url-loader',
-                        options: {  
-                            limit: 1000000,
-                        }
-                    }
-                ]
-            }
         ]
     },
     plugins:[
@@ -111,4 +146,4 @@ module.exports = {
         //webpack4.0后，使用mini-css-extract-plugin替换了此插件 https://github.com/webpack-contrib/mini-css-extract-plugin
         new ExtractTextWebpackPlugin('[name].bundle.[hash:5].css'),
     ]
-}
+} 
